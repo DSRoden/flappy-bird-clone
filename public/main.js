@@ -1,23 +1,31 @@
 var game = new Phaser.Game(400, 490, Phaser.AUTO, 'gameDiv');
 
 var mainState = {
+
   preload: function(){
 
-     game.stage.backgroundColor = '#71c5cf';
+     //game.stage.backgroundColor = 'black';
 
      game.load.image('bird', 'assets/bird.png');
 
-     game.load.image('pipe', 'assets/pipe.png');
+     game.load.image('butterfly', 'assets/ghost.png');
+     game.load.image('pipe', 'assets/pumpkin.png');
 
-     game.load.audio('jump', 'assets/jump.wav');
+     game.load.audio('jump', 'assets/beat5.mp3');
+     game.load.audio('laugh', 'assets/laughter.mp3');
+
+     game.load.image('background','/assets/sky5.png');
+
 
   },
 
   create: function() {
 
+    var background = game.add.tileSprite(0, 0, 400, 490, 'background');
+
     game.physics.startSystem(Phaser.Physics.Arcade);
 
-    this.bird = this.game.add.sprite(100, 245, 'bird');
+    this.bird = this.game.add.sprite(100, 245, 'butterfly');
 
     this.bird.anchor.setTo(-0.2, 0.5);
 
@@ -39,6 +47,7 @@ var mainState = {
     this.labelScore = game.add.text(20, 20, "0", {font: "30px Arial", fill: "#ffffff"});
 
     this.jumpSound = game.add.audio('jump');
+    this.laughSound = game.add.audio('laugh');
 
   },
 
@@ -108,7 +117,7 @@ var mainState = {
     }
 
     this.bird.alive = false;
-
+    this.laughSound.play();
     game.time.events.remove(this.timer);
 
     this.pipes.forEachAlive(function(p){
