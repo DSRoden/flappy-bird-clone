@@ -14,7 +14,7 @@ var mainState = {
      game.load.audio('jump', 'assets/beat5.mp3');
      game.load.audio('laugh', 'assets/laughter.mp3');
 
-     game.load.image('background','/assets/sky5.png');
+     game.load.image('background','assets/sky5.png');
 
 
   },
